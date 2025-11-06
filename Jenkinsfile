@@ -10,10 +10,10 @@ pipeline {
 
         stage('SonarQube Analysis') {
             environment {
-                scannerHome = tool 'SonarScanner' // must match your configured name
+                scannerHome = tool 'SonarScanner'
             }
             steps {
-                withSonarQubeEnv('SonarQube') { // must match the name in Manage Jenkins > System
+                withSonarQubeEnv('SonarQube') {
                     sh """
                     ${scannerHome}/bin/sonar-scanner \
                     -Dsonar.projectKey=pickle \
