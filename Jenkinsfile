@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        sonarRunner 'SonarScanner'
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -14,10 +10,10 @@ pipeline {
 
         stage('SonarQube Analysis') {
             environment {
-                scannerHome = tool 'SonarScanner'
+                scannerHome = tool 'SonarScanner' // must match your configured name
             }
             steps {
-                withSonarQubeEnv('SonarQube') {
+                withSonarQubeEnv('SonarQube') { // must match the name in Manage Jenkins > System
                     sh """
                     ${scannerHome}/bin/sonar-scanner \
                     -Dsonar.projectKey=pickle \
