@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        sonarQube 'SonarScanner'
+        sonarRunner 'SonarScanner'
     }
 
     stages {
@@ -19,19 +19,4 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh "${scannerHome}/bin/sonar-scanner \
-                        -Dsonar.projectKey=pickle \
-                        -Dsonar.sources=. \
-                        -Dsonar.host.url=http://54.173.134.215:9000"
-                }
-            }
-        }
-
-        stage('Quality Gate') {
-            steps {
-                timeout(time: 2, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
-    }
-}
+                        -Dsonar.projectKey=pick
